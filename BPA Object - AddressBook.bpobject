@@ -67,7 +67,15 @@
     <name>Check duplicate records</name>
     <view>
       <camerax>0</camerax>
-      <cameray>221</cameray>
+      <cameray>-43</cameray>
+      <zoom version="2">1.25</zoom>
+    </view>
+  </subsheet>
+  <subsheet subsheetid="53f0a18f-de08-4bff-a5f3-c49ac875aac8" type="Normal" published="False">
+    <name>Retreiving by Name</name>
+    <view>
+      <camerax>0</camerax>
+      <cameray>0</cameray>
       <zoom version="2">1.25</zoom>
     </view>
   </subsheet>
@@ -775,5 +783,86 @@ You will not be able to call this action from a business process, nor will it be
     <display x="15" y="135" />
     <onsuccess>cd5338aa-cd5f-4b87-b52b-1c29101fa2e1</onsuccess>
     <processid>a0dc68ee-1f20-47cd-a8d0-0f554943c540</processid>
+  </stage>
+  <stage stageid="1befe9d9-8c79-451c-b8ee-0f3ccc02ef2d" name="Retreiving by Name" type="SubSheetInfo">
+    <subsheetid>53f0a18f-de08-4bff-a5f3-c49ac875aac8</subsheetid>
+    <display x="-195" y="-105" w="150" h="90" />
+  </stage>
+  <stage stageid="a25de572-d33f-4d20-9382-3334626d1f61" name="Start" type="Start">
+    <subsheetid>53f0a18f-de08-4bff-a5f3-c49ac875aac8</subsheetid>
+    <loginhibit />
+    <display x="15" y="-105" />
+    <onsuccess>77847441-6196-420c-a2b3-d3e8fa6be374</onsuccess>
+  </stage>
+  <stage stageid="ad5cd3cc-254a-436e-b4c7-c6f91c3d13b0" name="End" type="End">
+    <subsheetid>53f0a18f-de08-4bff-a5f3-c49ac875aac8</subsheetid>
+    <loginhibit />
+    <display x="15" y="30" />
+  </stage>
+  <stage stageid="a6671cb0-8bdb-49fe-bc9c-b568644870c8" name="Reading AddressBook Table Data" type="Action">
+    <subsheetid>53f0a18f-de08-4bff-a5f3-c49ac875aac8</subsheetid>
+    <loginhibit onsuccess="true" />
+    <display x="15" y="-15" />
+    <inputs>
+      <input type="text" name="SQL" friendlyname="SQL" narrative="The SQL query to use to perform this action" expr="&quot;select * from [AddressBookSystem].[dbo].[AddressBook] where first_name = 'Shobhit' AND last_name = 'Di'&quot;" />
+    </inputs>
+    <outputs>
+      <output type="flag" name="Success" friendlyname="Success" narrative="Flag indicating success (True) or failure (False)" stage="Success" />
+      <output type="text" name="Message" friendlyname="Message" narrative="Error message giving detail regarding why this action failed" stage="Message" />
+      <output type="collection" name="Results" friendlyname="Results" narrative="The collection of results from the query" stage="retreived record" />
+    </outputs>
+    <onsuccess>ad5cd3cc-254a-436e-b4c7-c6f91c3d13b0</onsuccess>
+    <resource object="Data - SQL Server" action="Get Collection" />
+  </stage>
+  <stage stageid="f846251d-471b-4473-a6ed-a7bb2c7b533b" name="Retrieved Records Collection" type="Collection">
+    <subsheetid>53f0a18f-de08-4bff-a5f3-c49ac875aac8</subsheetid>
+    <display x="180" y="-75" />
+    <datatype>collection</datatype>
+    <alwaysinit />
+    <collectioninfo>
+      <field name="first_name" type="text" />
+      <field name="last_name" type="text" />
+      <field name="address" type="text" />
+      <field name="city" type="text" />
+      <field name="state" type="text" />
+      <field name="zip" type="text" />
+      <field name="phone_number" type="text" />
+      <field name="email" type="text" />
+    </collectioninfo>
+    <initialvalue>
+      <row>
+        <field name="first_name" type="text" value="" />
+        <field name="last_name" type="text" value="" />
+        <field name="address" type="text" value="" />
+        <field name="city" type="text" value="" />
+        <field name="state" type="text" value="" />
+        <field name="zip" type="text" value="" />
+        <field name="phone_number" type="text" value="" />
+        <field name="email" type="text" value="" />
+      </row>
+    </initialvalue>
+  </stage>
+  <stage stageid="53f676e5-cbc6-4ab6-9e9d-4e659e8c03a5" name="Success" type="Data">
+    <subsheetid>53f0a18f-de08-4bff-a5f3-c49ac875aac8</subsheetid>
+    <display x="180" y="-30" />
+    <datatype>flag</datatype>
+    <initialvalue />
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="7d283515-02f1-4f98-8da4-7fd9bc54fd2c" name="Message" type="Data">
+    <subsheetid>53f0a18f-de08-4bff-a5f3-c49ac875aac8</subsheetid>
+    <display x="180" y="15" />
+    <datatype>text</datatype>
+    <initialvalue />
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="77847441-6196-420c-a2b3-d3e8fa6be374" name="Set Connection" type="SubSheet">
+    <subsheetid>53f0a18f-de08-4bff-a5f3-c49ac875aac8</subsheetid>
+    <loginhibit />
+    <display x="15" y="-60" />
+    <onsuccess>a6671cb0-8bdb-49fe-bc9c-b568644870c8</onsuccess>
+    <processid>24c6ff6c-74b5-4ecd-ab0c-25fba6df233c</processid>
   </stage>
 </process>
